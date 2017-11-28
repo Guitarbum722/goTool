@@ -1,29 +1,20 @@
-package main
+package tool
 
 import (
+	"crypto/md5"
 	"fmt"
-	"math/rand"
-	"time"
 )
 
-func main() {
-	var myname string
-	var toolresponse string
+// IsTool returns whether or not the name is a tool.  Deal with it.
+func IsTool(b []byte) bool {
 
-	nameQuestion := "What is your name?"
-	fmt.Println(nameQuestion)
-	fmt.Scanf("%s", &myname)
+	// md5.Sum returns an array of 16 bytes...convert it to a base16 string.
+	md5Sum := fmt.Sprintf("%x", md5.Sum(b))
 
-	s1 := rand.NewSource(time.Now().UnixNano())
-	r1 := rand.New(s1)
-	randomNum := r1.Intn(100)
-
-	if randomNum > 51 {
-		toolresponse = "You're a tool... sorry bud"
-	} else {
-		toolresponse = "Congrats, you're not a tool. Celebrate"
+	// if the last character in the base16 string is int value 8 - F, then return true.
+	if md5Sum[len(md5Sum)-1] > '8' {
+		return true
 	}
 
-	fmt.Print("Hello ", myname+" "+toolresponse)
-	fmt.Println()
+	return false
 }
