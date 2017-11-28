@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Rufio0425/tool"
+	"github.com/Rufio0425/goTool"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(nameQuestion)
 	fmt.Scanf("%s", &myname)
 
-	if tool.IsTool([]byte(myname)) {
+	if goTool.IsTool([]byte(myname)) {
 		toolresponse = "You're a tool... sorry bud."
 	} else {
 		toolresponse = "Congrats, you're not a tool. Celebrate!"
